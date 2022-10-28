@@ -1,5 +1,4 @@
 import movieModel from '../models/movies.js';
-
 import { UserDisplayName } from '../utils/index.js';
 
 export function DisplayMoviesList(req, res, next){

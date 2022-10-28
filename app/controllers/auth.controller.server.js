@@ -68,17 +68,17 @@ export function ProcessRegisterPage(req, res, next){
                 req.flash('registerMessage', 'Server Error')
             }
             
-            return res.redirect('/register');
+            return res.redirect('/register');           //return response back to register for error message
         }
 
-        return passport.authenticate('local')(req, res, function()
+        return passport.authenticate('local')(req, res, function()      //if it went well and all checks out - response = good
         {
-            return res.redirect('/');
+            return res.redirect('/');                       //return to homepage after successful password entry
         });
     });
 }
 
-export function ProcessLogoutPage(req, res, next){
+export function ProcessLogoutPage(req, res, next){      //no page for logout rendering
     req.logOut(function(err){
         if(err){
             console.error(err);

@@ -5,25 +5,20 @@ Student #822281549
 October 7th, 2022
 */
 
-//INDEX ROUTES
-
-import { Router } from 'express';
-import { displayHomePage, 
-    displayAboutMePage, 
+import { Router } from "express";
+import { displayAboutPage, 
+    displayContactPage, 
+    displayHomePage, 
     displayProjectsPage, 
-    displayServicesPage, 
-    displayContactPage } from '../controllers/index.controller.server.js'
+    displayServicesPage } from "../controllers/index.controller.server.js";
 
-//INSTANTIATING ABOVE ROUTER
-const router = new Router();
+const router = Router();
 
-//ROUTER 
-router.get('/', displayHomePage);          //home page path
-router.get('/home', displayHomePage);   
-router.get('/about', displayAboutMePage);     
-router.get('/projects', displayProjectsPage); 
-router.get('/services', displayServicesPage); 
-router.get('/contact', displayContactPage); 
+router.get('/', displayHomePage);
+router.get('/home', displayHomePage);
+router.get('/about', displayAboutPage);
+router.get('/projects', displayProjectsPage);
+router.get('/services', displayServicesPage);
+router.get('/contact', displayContactPage);
 
-//needs to be exportable for use
 export default router;

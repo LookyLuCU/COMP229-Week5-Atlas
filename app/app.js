@@ -17,15 +17,15 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-//Auth step 1 - import modules
+// Auth Step 1 - import modules
 import passport from 'passport';
 import passportLocal from 'passport-local';
 import flash from 'connect-flash';
 
-//Auth step 2 - define our auth strategy
+// Auth Step 2 - defien our auth strategy
 let localStrategy = passportLocal.Strategy;
 
-//Auth step 3 - import the user model
+// Auth Step 3 - import the user model
 import User from './models/user.js';
 
 // Import Mongoose Module
@@ -37,7 +37,7 @@ import { MongoURI, Secret } from '../config/config.js';
 // Import Routes
 import indexRouter from './routes/index.route.server.js'
 import movieRouter from './routes/movies.route.server.js';
-import authRouter from './routes/auth.route.server.js;'
+import authRouter from './routes/auth.route.server.js';
 
 // Instantiate Express Application
 const app = express();
@@ -63,25 +63,25 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname,'/client')));
 app.use(express.static(path.join(__dirname,'../public')));
 
-//Auth step 4 - setup Express session
+
+// Auth Step 4 - Setup Express Session
 app.use(session({
     secret: Secret,
     saveUninitialized: false, 
     resave: false
 }));
 
-//Auth step 5 - Setup Flash
-//for special error messages - i.e. user entry error
-app.use(flash()); //to make sure app knows how to use flash
+// Auth Step 5 -  Setup Flash
+app.use(flash());
 
-//Auth step 6 - Initialize passport and session
+// Auth Step 6 - Initialize Passport and Session
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Auth step 7 - implment auth strategy
-passport.use(User.createStrategy());  //(Model.CreateStrategy) - because of user.js UserSchema plugins (where the magic happens with passwords)
+// Auth Step 7 - Implementing the Auth Strategy
+passport.use(User.createStrategy());
 
-//Auth step 8 - serialize and deserialize the user/infomration
+// Auth Step 8 - Setup serialization and deserialization
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 

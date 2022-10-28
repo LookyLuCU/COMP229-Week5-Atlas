@@ -1,5 +1,7 @@
 import movieModel from '../models/movies.js';
 
+import { UserDisplayName } from '../utils/index.js';
+
 export function DisplayMoviesList(req, res, next){
     movieModel.find(function(err, moviesCollection) {
         if(err){
@@ -7,12 +9,12 @@ export function DisplayMoviesList(req, res, next){
             res.end(err);
         }
 
-        res.render('index', {title: 'Movie List', page: 'movies/list', movies: moviesCollection});
+        res.render('index', {title: 'Movie List', page: 'movies/list', movies: moviesCollection, displayName: UserDisplayName(req)});
     })
 }
 
 export function DisplayMoviesAddPage(req, res, next){
-    res.render('index', { title: 'Add Movie', page: 'movies/edit', movie: {} });
+    res.render('index', { title: 'Add Movie', page: 'movies/edit', movie: {}, displayName: UserDisplayName(req) });
 }
 
 export function ProcessMoviesAddPage(req, res, next){
@@ -44,7 +46,7 @@ export function DisplayMoviesEditPage(req, res, next){
             res.end(err);
         }
 
-        res.render('index', { title: 'Edit Movie', page: 'movies/edit', movie: movie });
+        res.render('index', { title: 'Edit Movie', page: 'movies/edit', movie: movie, displayName: UserDisplayName(req) });
     });    
 }
 
